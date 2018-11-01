@@ -1,10 +1,19 @@
 # HDR
 
-## Prerequesities 
+## Prerequisites
 - Python 3
 - OpenCV
-- MAC OS, Windows 10
+- MAC OS or Windows 10
 
 ## Installation 
-- git clone https://github.com/msouppe/HDR-Computer-Vision.git
-- python main.py 
+Clone the repo:
+``` 
+git clone https://github.com/msouppe/HDR-Computer-Vision.git
+```
+
+Running the program:
+```bash
+python main.py 
+```
+
+## Output
