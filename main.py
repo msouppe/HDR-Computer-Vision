@@ -25,11 +25,11 @@ def load_images(f_path):
 # Return: Brightness of an image
 # Description: Calculate the average brightness per image
 def brightness(image):
-	print(image.sum())
-	print(type(image))
-	print(image.shape())
+	sum_pixels = image.sum()
+	num_pixels = image.shape[:2]
 
-	bright = image.sum() / image.size()
+	#bright = cv.mean(image)
+	bright =  sum_pixels/ num_pixels
 
 	return bright
 
@@ -42,6 +42,9 @@ def plot_(x, y, xlab, ylab):
 	plt.xlabel(xlab)
 	plt.ylabel(ylab)
 	plt.show()
+	plt.clf()
+	plt.cla()
+	plt.close()
 
 # Function: get_img_center
 # Parameters: image
@@ -65,9 +68,12 @@ def get_img_center(image):
 # Parameter(s): image
 # Return: 3 arrays, one for every color channel
 # Description: Split image by color channels
-def split_RGB(image):
-	b,g,r = cv.split(image)
-	return b,g,r
+def split_RGB(image):	
+	r = image[0,:,:]
+	g = image[:,0,:]
+	b = image[:,:,0]
+
+	return r,g,b
 
 def histogram(image):
 
@@ -100,9 +106,11 @@ def main():
 	green_1 = []
 	red_1 = []
 
+	print(p1_imgs[1].shape)
+
 	# Split images into color channels
 	for i in p1_imgs:
-		b,g,r = split_RGB(i)
+		r,g,b = split_RGB(i)
 		blue_1.append(b)
 		green_1.append(g)
 		red_1.append(r)
@@ -113,7 +121,7 @@ def main():
 	brightness_green = []
 	p1_brightness = []
 
-	print(len(p1_imgs))
+	#print(len(p1_imgs))
 
 	for i in range(0,len(p1_imgs)):
 		p1_brightness.append(brightness(red_1[i]))
@@ -121,8 +129,7 @@ def main():
 	#print(p1_brightness)
 
 	# Plot the exposure time versus the image brightness
-	plot_(exp_time, brightness_red, 'T(s)', 'B\'')
-
+	plot_(exp_time, exp_time, 'T(s)', 'B\'')
 
 if __name__ == "__main__":
     main()
