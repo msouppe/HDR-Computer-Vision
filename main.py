@@ -4,6 +4,7 @@ from PIL import Image as PImage
 from PIL import ImageEnhance
 import matplotlib.pyplot as plt
 import numpy as np
+import math
 
 from util import image_process as ip
 import gamma as gm
@@ -33,7 +34,10 @@ def main():
 
 	# Exposure times
 	exp_time = [1/4, 1/5, 1/6, 1/8, 1/10, 1/13, 1/15, 1/20, 1/25, 1/30, 1/40, 1/50, 1/60, 1/80, 1/100, 1/125, 1/160, 1/200, 1/250]
-
+	# Take log values of exposure times
+	log_exp_time = np.log10(exp_time)
+	
+	
 	# Test
 	#test_img = curr_work_dir + image_set[0] + "img1_1:004.JPG"
 	#img = cv.imread(test_img)
@@ -41,6 +45,12 @@ def main():
 
 	imgs = ip.load_images(filepath_1)
 	brightness = ip.average_all_img_brightness(imgs)
+	
+	# Take log values of brightness values
+	log_brightness0 = np.log10(brightness[0])
+	log_brightness1 = np.log10(brightness[1])
+	log_brightness2 = np.log10(brightness[2])
+	
 
 	####### Part 1 #######
 	# Plot the exposure time versus the image brightness
