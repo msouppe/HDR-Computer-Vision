@@ -27,8 +27,8 @@ def load_images(f_path):
 def region_of_interest(image):
 	# Get image dimensions
 	height, width = image.shape[:2]
-	h = int(height / 2)
-	w = int(width / 2)
+	h = int(height / 4)
+	w = int(width * 3 / 4)
 
 	# Crop image
 	imgCrop = image[h:h+100, w:w+100]
