@@ -17,13 +17,13 @@ python3 main.py
 ```
   
 ## Output
-Part 1
+*Part 1*  
 For every color channel; blue, green, and red, we plot the graphs for the following:  
 - Exposure Time vs Brightness  
 - Log of Exposure Time vs Log of Brightness with Regression  
 - Exposure Time vs Brightness'G  
   
-Part 2
+*Part 2*   
 For every color channel; blue, green, and red, we plot the graphs for the following:     
 - Histogram B'g (a0 * T)   
 - Histogram B'g (a1 * T)   
@@ -31,6 +31,6 @@ For every color channel; blue, green, and red, we plot the graphs for the follow
 - Histogram B'g (a1 * T) / a1      
 - Histogram B'g (a2 * T) / a2     
   
-Part 3
+*Part 3*
 
-Part 4
+*Part 4*
