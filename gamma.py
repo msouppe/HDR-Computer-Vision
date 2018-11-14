@@ -14,13 +14,13 @@ def gamma(exp_times, filepath):
 	green = brightness[1]
 	red = brightness[2]
 
-	blue_curve, b_slope = linear_regression_curve(exp_times, np.log10(blue))
-	green_curve, g_slope = linear_regression_curve(exp_times, np.log10(green))
-	red_curve, r_slope = linear_regression_curve(exp_times, np.log10(red))
+	blue_curve, b_gamma = linear_regression_curve(exp_times, np.log10(blue))
+	green_curve, g_gamma = linear_regression_curve(exp_times, np.log10(green))
+	red_curve, r_gamma = linear_regression_curve(exp_times, np.log10(red))
 
-	g.append(b_slope)
-	g.append(g_slope)
-	g.append(r_slope)
+	g.append(b_gamma)
+	g.append(g_gamma)
+	g.append(r_gamma)
 
 	curve.append(blue_curve)
 	curve.append(green_curve)
@@ -32,9 +32,9 @@ def gamma(exp_times, filepath):
 def linear_regression_curve(exp_times, channel):
 	slope, intercept, r_value, p_value, std_error = stats.linregress(exp_times, channel)
 	y = np.add(slope * exp_times,intercept)
-	return y, slope
+	gamma = 1/slope
+	return y, gamma
 
 # Calulate adjusted brightness
-def adjusted_brightness(channel, slope):
-	expo = 1/slope
-	return np.power(channel, expo)
+def adjusted_brightness(channel, gamma):
+	return np.power(channel, gamma)
