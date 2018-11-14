@@ -1,7 +1,5 @@
 import os
 import cv2 as cv
-from PIL import Image as PImage
-from PIL import ImageEnhance
 import matplotlib.pyplot as plt
 import numpy as np
 

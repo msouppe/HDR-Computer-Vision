@@ -29,20 +29,19 @@ def multi_plot_(x, y, y1, xlab, ylab, main, colr):
 
 def hist_(image, g, xlab, ylab, a=1):
 	img = cv.imread(image)
-	num_bins = 25
+	num_bins = 256
 	color = ('b','g','r')
 
 	for i,col in enumerate(color):
-		end = np.power(256, g[0])
-
-		image = np.divide(np.float32(np.power(img, g[0])), a)
+		end = np.power(255, g[i])
+		image = np.divide(np.float32(np.power(img, g[i])), a)
+		max_ = np.max(image)
 
 		plt.subplot(1, 3, i+1)
-		histr = cv.calcHist([image], [i], None, [num_bins], [0,end])
+		histr = cv.calcHist([image], [i], None, [256], [0,end])
 		plt.plot(histr, color = col)
 		plt.xlabel(xlab)
 		plt.ylabel(ylab)
-		plt.xlim([0,end])
 
 	plt.tight_layout()
 	plt.show()

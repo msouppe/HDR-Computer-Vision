@@ -1,7 +1,5 @@
 import os
 import cv2 as cv
-from PIL import Image as PImage
-from PIL import ImageEnhance
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -66,25 +64,25 @@ print(g)
 # Histogram B'g (a0 * T)
 # Note: exposure time = 1/2000
 #       a0 = 1
-an.hist_(hdr_path + hdr[0], g, xlab, ylab)
+#an.hist_(hdr_path + hdr[0], g, xlab, ylab)
 
 # Histogram B'g (a1 * T)
 # Note: exposure time = 1/750
 #       a1 = 2.6667
-an.hist_(hdr_path + hdr[1], g, xlab, ylab)
+#an.hist_(hdr_path + hdr[1], g, xlab, ylab)
 
 # Histogram B'g (a2 * T)
 # Note: exposure time = 1/250
 #       a2 = 8
-an.hist_(hdr_path + hdr[2], g, xlab, xlab)
+#an.hist_(hdr_path + hdr[2], g, xlab, xlab)
 
 # Histogram B'g (a1 * T) / a1
 a1 = 2.6667
-an.hist_(hdr_path + hdr[1], g, xlab, ylab, a1)
+#an.hist_(hdr_path + hdr[1], g, xlab, ylab, a1)
 
 # Histogram B'g (a2 * T) / a2
 a2 = 8
-an.hist_(hdr_path + hdr[2], g, xlab, xlab, a2)
+#an.hist_(hdr_path + hdr[2], g, xlab, xlab, a2)
 
 ###################################################################
 ############################## Part 3 #############################
