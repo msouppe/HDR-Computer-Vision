@@ -4,7 +4,7 @@ import numpy as np
 from scipy import stats
 
 def gamma(exp_times, filepath):
-	imgs = ip.load_images(filepath)
+	imgs = ip.load_images(filepath, roi=True)
 	brightness = ip.average_all_img_brightness(imgs)
 
 	g = []

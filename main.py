@@ -3,8 +3,9 @@ import cv2 as cv
 import matplotlib.pyplot as plt
 import numpy as np
 
-# Repo library
+# My library
 from util import analyzer as an
+from util import image_process as ip
 import gamma as gm
 import hdr
 
@@ -22,9 +23,9 @@ hdr_path = curr_work_dir + "/hdr/"
 exp_time = [1/125, 1/180, 1/350, 1/500, 1/750, 1/1000, 1/1500, 1/2000]
 log_exp= log_(exp_time)
 
-###################################################################
-############################## Part 1 #############################
-###################################################################
+#-----------------------------------------------------------------#
+#                              Part 1 
+#-----------------------------------------------------------------#
 curve, g, brightness = gm.gamma(log_exp, img_path)
 log_bright = log_(brightness)
 
@@ -53,37 +54,65 @@ main = ' - Linearized Exposure Time vs Brightness'
 #an.plot_(exp_time, gm.adjusted_brightness(brightness[1], g[1]), xlab, ylab, color[1] + main, 'g')
 #an.plot_(exp_time, gm.adjusted_brightness(brightness[2], g[2]), xlab, ylab, color[2] + main, 'r')
 
-###################################################################
-############################## Part 2 #############################
-###################################################################
+#-----------------------------------------------------------------#
+#                              Part 2 
+#-----------------------------------------------------------------#
 xlab = 'Pixel Values'
 ylab = 'Number of Pixels'
-hdr = ['hdr1_42.JPG', 'hdr2_44.JPG', 'hdr3_45.JPG']
+hdr_img = ['hdr1_42.JPG', 'hdr2_44.JPG', 'hdr3_45.JPG']
+hdr_exposure = [1/6000, 1/750, 1/500]
+#hdr_img = ['hdr1_42.jpg', 'hdr2_44.jpg', 'hdr3_45.jpg']
 print(g)
 
 # Histogram B'g (a0 * T)
 # Note: exposure time = 1/2000
 #       a0 = 1
-#an.hist_(hdr_path + hdr[0], g, xlab, ylab)
+#an.hist_gamma(hdr_path + hdr_img[0], g, xlab, ylab)
 
 # Histogram B'g (a1 * T)
 # Note: exposure time = 1/750
 #       a1 = 2.6667
-#an.hist_(hdr_path + hdr[1], g, xlab, ylab)
+#an.hist_gamma(hdr_path + hdr_img[1], g, xlab, ylab)
 
 # Histogram B'g (a2 * T)
 # Note: exposure time = 1/250
 #       a2 = 8
-#an.hist_(hdr_path + hdr[2], g, xlab, xlab)
+#an.hist_gamma(hdr_path + hdr_img[2], g, xlab, ylab)
 
 # Histogram B'g (a1 * T) / a1
-a1 = 2.6667
-#an.hist_(hdr_path + hdr[1], g, xlab, ylab, a1)
+#a1 = 2.6667
+a1 = hdr_exposure[1]/ hdr_exposure[0]
+#an.hist_gamma(hdr_path + hdr_img[1], g, xlab, ylab, a1)
 
 # Histogram B'g (a2 * T) / a2
-a2 = 8
-#an.hist_(hdr_path + hdr[2], g, xlab, xlab, a2)
+#a2 = 8
+a2 = hdr_exposure[2]/ hdr_exposure[0]
+#an.hist_gamma(hdr_path + hdr_img[2], g, xlab, ylab, a2)
 
-###################################################################
-############################## Part 3 #############################
-###################################################################
+#-----------------------------------------------------------------#
+#                              Part 3 
+#-----------------------------------------------------------------#
+# HDR1 Histogram
+method1 = 1
+composite_image_1 = hdr.composite(hdr_path, g, a1, a2, method1)
+#an.hist_hdr1(composite_image_1, xlab, ylab, g)
+
+# HDR2 Histogram
+method2 = 2
+composite_image_2 = hdr.composite(hdr_path, g, a1, a2, method2)
+#an.hist_hdr1(composite_image_2, xlab, ylab, g)
+
+#-----------------------------------------------------------------#
+#                              Part 4 
+#-----------------------------------------------------------------#
+# HDR1 
+img1 = np.uint8(composite_image_1)
+convert1 = cv.cvtColor(img1, cv.COLOR_BGR2RGB)
+plt.imshow(convert1)
+plt.show()
+
+# HDR2
+img2 = np.uint8(composite_image_2)
+convert2 = cv.cvtColor(img2, cv.COLOR_BGR2RGB)
+plt.imshow(convert2)
+plt.show()
