@@ -7,16 +7,23 @@ import numpy as np
 # Parameter(s): f_path
 # Return: Array of images
 # Description: Retrieves images from specified src
-def load_images(f_path):
-   	img_array = []
-   	imgs = os.listdir(f_path)
+def load_images(f_path, roi=False):
+	roi = True
+	img_array = []
+	imgs = os.listdir(f_path)
+	print(imgs)
+	#print("load_images() filepath: ", f_path)
 
-   	for image in imgs:
-   	   	#img = PImage.open(f_path + image)
-   	   	img = cv.imread(f_path + image)
-   	   	img_array.append(region_of_interest(img))
+	for image in imgs:
+		if image.endswith(".JPG"):
+			#img = PImage.open(f_path + image)
+			img = cv.imread(f_path + image)
+			if roi == True:
+				img_array.append(region_of_interest(img))
+			else:
+				img_array.append(img)
 
-   	return img_array
+	return img_array
 
 # Function: region_of_interest
 # Parameters: image
@@ -25,11 +32,13 @@ def load_images(f_path):
 def region_of_interest(image):
 	# Get image dimensions
 	height, width = image.shape[:2]
-	h = int(height / 4)
-	w = int(width * 3 / 4)
+	# h = int(height / 4)
+	# w = int(width * 3 / 4)
+	h = int(height / 2)
+	w = int(width / 2)
 
 	# Crop image
-	imgCrop = image[h:h+100, w:w+100]
+	imgCrop = image[h:h+200, w:w+200]
 
 	# Sanity check that the region was choosen correctly
 	#im[h:h+100, w:w+100] = [255,255,255]
@@ -75,3 +84,12 @@ def average_all_img_brightness(images):
 	r_brightness = np.sort(img_brightness[:,2])[::-1]
 
 	return [b_brightness, g_brightness, r_brightness]
+
+def merge_channels(channels):
+	newImg = cv.merge(channels)
+	return newImg
+
+def B_to_power_g(channel, g, a):
+	newChan = np.divide(np.float32(np.power(channel, g)), a)
+	return newChan
+
