@@ -71,4 +71,5 @@ def tone_map(image):
 	tonemapDrago = cv.createTonemapDrago(1.0, 0.7)
 	ldrDrago = tonemapDrago.process(image)
 	ldrDrago = 3 * ldrDrago
-	cv.imwrite("Tone_map1.jpg", ldrDrago * 255)
+	#cv.imwrite("Tone_map1.jpg", ldrDrago * 255)
+	return ldrDrago

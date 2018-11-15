@@ -59,15 +59,16 @@ main = ' - Linearized Exposure Time vs Brightness'
 #-----------------------------------------------------------------#
 xlab = 'Pixel Values'
 ylab = 'Number of Pixels'
-hdr_img = ['hdr1_42.JPG', 'hdr2_44.JPG', 'hdr3_45.JPG']
-hdr_exposure = [1/6000, 1/750, 1/500]
+hdr_img = ['img1_59.JPG', 'img2_61.JPG', 'img3_62.JPG']
+#hdr_exposure = [1/6000, 1/750, 1/500]
+hdr_exposure = [1/8000, 1/1000, 1/250]
 #hdr_img = ['hdr1_42.jpg', 'hdr2_44.jpg', 'hdr3_45.jpg']
 print("main.py - Part 2: ", g)
 
 # Histogram B'g (a0 * T)
 # Note: exposure time = 1/2000
 #       a0 = 1
-#an.hist_gamma(hdr_path + hdr_img[0], g, xlab, ylab)
+an.hist_gamma(hdr_path + hdr_img[0], g, xlab, ylab)
 
 # Histogram B'g (a1 * T)
 # Note: exposure time = 1/750
@@ -96,7 +97,7 @@ print(a2)
 #-----------------------------------------------------------------#
 # HDR1 Histogram
 method1 = 1
-#composite_image_1 = hdr.composite(hdr_path, g, a1, a2, method1)
+composite_image_1 = hdr.composite(hdr_path, g, a1, a2, method1)
 #an.hist_hdr1(composite_image_1, xlab, ylab, g)
 
 # HDR2 Histogram
@@ -114,14 +115,10 @@ composite_image_2 = hdr.composite(hdr_path, g, a1, a2, method2)
 # plt.show()
 
 # HDR2
-img2 = np.uint8(composite_image_2)
-convert2 = cv.cvtColor(img2, cv.COLOR_BGR2RGB)
-plt.imshow(convert2)
-#plt.savefig("hdr2.png")
-plt.show()
+# img2 = np.uint8(composite_image_2)
+# convert2 = cv.cvtColor(img2, cv.COLOR_BGR2RGB)
+# #plt.imshow(hdr.tone_map(convert2))
+# plt.imshow(convert2)
+# #plt.savefig("hdr2.png")
+# plt.show()
 
-# Tonemap
-tone_map_img = hdr.tone_map(convert2)
-plt.imshow(tone_map_img)
-plt.savefig("tonemap.png")
-plt.show()
