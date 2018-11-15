@@ -2,7 +2,7 @@
 
 ## Prerequisites
 - Python 3 
-- Python packages: OpenCV, numpy, matplotlib.pyplot, scipy
+- Python packages: OpenCV, numpy, matplotlib.pyplot, scipy, os, time
 - MAC OS or Windows 10 (Ubuntu Windows' Bash)
 
 ## Installation 
@@ -17,6 +17,16 @@ git clone https://github.com/msouppe/HDR-Computer-Vision.git
 ```bash
 python3 main.py 
 ```
+
+## Project Structure
+* `main.py`: Main program to ob
+* `gamma.py`: Obtain the gamma value to raise the brightness to the power of gamma
+* `hdr.py`: Creates composite images
+* `util/analyzer.py`: Plots all different graphs and histogram
+* `util/image_process.py`: Preprocessing images such as obtaining region of interest, splitting channels, merging channels, and calculating the average brightness of an 
+* `output/`: All of the output graphs and images 
+* `hdr/`: Selected three images to create HDR images
+* `hdr_fullstack/`: All images to create HDR images 
   
 ## Output
 **Part 1**  

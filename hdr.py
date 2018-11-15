@@ -67,9 +67,10 @@ def composite(filepath, g, a1, a2, method):
 	return composite_image
 
 def tone_map(image):
+	img = np.float32(image)
+
 	# Tonemap using Drago's method to obtain 24-bit color image
-	tonemapDrago = cv.createTonemapDrago(1.0, 0.7)
-	ldrDrago = tonemapDrago.process(image)
+	tonemapDrago = cv.createTonemapDrago(0.4, 0.9, 0.7)
+	ldrDrago = tonemapDrago.process(img)
 	ldrDrago = 3 * ldrDrago
-	#cv.imwrite("Tone_map1.jpg", ldrDrago * 255)
 	return ldrDrago
