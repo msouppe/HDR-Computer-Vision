@@ -122,5 +122,6 @@ plt.show()
 
 # Tonemap
 tone_map_img = hdr.tone_map(convert2)
+plt.imshow(tone_map_img)
 plt.savefig("tonemap.png")
 plt.show()
