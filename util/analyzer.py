@@ -27,8 +27,8 @@ def multi_plot_(x, y, y1, xlab, ylab, main, colr):
 	plt.cla()
 	plt.close()
 
-def hist_gamma(imag, g, xlab, ylab, a=1):
-	img = cv.imread(imag)
+def hist_gamma(img, g, xlab, ylab, main, a=1):
+	#img = cv.imread(imag)
 	num_bins = 256
 	color = ('b','g','r')
 
@@ -41,11 +41,13 @@ def hist_gamma(imag, g, xlab, ylab, a=1):
 		plt.plot(histr, color = col)
 		plt.xlabel(xlab)
 		plt.ylabel(ylab)
+		plt.title(main)
+
 
 	plt.tight_layout()
 	plt.show()
 
-def hist_hdr1(image, xlab, ylab, g):
+def hist_hdr1(image, xlab, ylab, g, main):
 	color = ('b','g','r')
 
 	for i,col in enumerate(color):
@@ -53,9 +55,10 @@ def hist_hdr1(image, xlab, ylab, g):
 		plt.subplot(1, 3, i+1)
 		histr = cv.calcHist([image], [i], None, [256], [0,256])
 		plt.plot(histr, color = col)
-		plt.fill_between(histr, 0, closep)
 		plt.xlabel(xlab)
 		plt.ylabel(ylab)
 
+	plt.suptitle(main)
 	plt.tight_layout()
+	plt.subplots_adjust(top=0.8)
 	plt.show()

@@ -12,7 +12,6 @@ def load_images(f_path, roi=False):
 	imgs = os.listdir(f_path)
 	print("load_images(): ", sorted(imgs))
 
-
 	for image in sorted(imgs):
 		if image.endswith(".JPG"):
 			#img = PImage.open(f_path + image)
