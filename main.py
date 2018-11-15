@@ -117,4 +117,10 @@ composite_image_2 = hdr.composite(hdr_path, g, a1, a2, method2)
 img2 = np.uint8(composite_image_2)
 convert2 = cv.cvtColor(img2, cv.COLOR_BGR2RGB)
 plt.imshow(convert2)
+#plt.savefig("hdr2.png")
+plt.show()
+
+# Tonemap
+tone_map_img = hdr.tone_map(convert2)
+plt.savefig("tonemap.png")
 plt.show()

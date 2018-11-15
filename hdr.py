@@ -18,7 +18,7 @@ def composite_channel(chan1, chan2, chan3, g, a1, a2, method):
 	for x in range(0, int(height)):
 		for y in range(0, int(width)):
 
-			threshold_chan3 = 255/ float((a2/a1) ** g)
+			threshold_chan3 = 255/ float((a2/a1)**g)
 			threshold_chan2 = 255/ float(a1 ** g)
 			#print(x,y)
 			#print("composite_chann[x][y]: ", composite_chann[x][y])
@@ -65,3 +65,10 @@ def composite(filepath, g, a1, a2, method):
 	(b,g,r) = compsite_imgs(imgs[0], imgs[1], imgs[2], g, a1, a2, method)
 	composite_image = ip.merge_channels((b,g,r))
 	return composite_image
+
+def tone_map(image):
+	# Tonemap using Drago's method to obtain 24-bit color image
+	tonemapDrago = cv.createTonemapDrago(1.0, 0.7)
+	ldrDrago = tonemapDrago.process(image)
+	ldrDrago = 3 * ldrDrago
+	cv.imwrite("Tone_map1.jpg", ldrDrago * 255)
