@@ -62,7 +62,7 @@ ylab = 'Number of Pixels'
 hdr_img = ['hdr1_42.JPG', 'hdr2_44.JPG', 'hdr3_45.JPG']
 hdr_exposure = [1/6000, 1/750, 1/500]
 #hdr_img = ['hdr1_42.jpg', 'hdr2_44.jpg', 'hdr3_45.jpg']
-print(g)
+print("main.py - Part 2: ", g)
 
 # Histogram B'g (a0 * T)
 # Note: exposure time = 1/2000
@@ -82,11 +82,13 @@ print(g)
 # Histogram B'g (a1 * T) / a1
 #a1 = 2.6667
 a1 = hdr_exposure[1]/ hdr_exposure[0]
+print(a1)
 #an.hist_gamma(hdr_path + hdr_img[1], g, xlab, ylab, a1)
 
 # Histogram B'g (a2 * T) / a2
 #a2 = 8
 a2 = hdr_exposure[2]/ hdr_exposure[0]
+print(a2)
 #an.hist_gamma(hdr_path + hdr_img[2], g, xlab, ylab, a2)
 
 #-----------------------------------------------------------------#
@@ -94,7 +96,7 @@ a2 = hdr_exposure[2]/ hdr_exposure[0]
 #-----------------------------------------------------------------#
 # HDR1 Histogram
 method1 = 1
-composite_image_1 = hdr.composite(hdr_path, g, a1, a2, method1)
+#composite_image_1 = hdr.composite(hdr_path, g, a1, a2, method1)
 #an.hist_hdr1(composite_image_1, xlab, ylab, g)
 
 # HDR2 Histogram
@@ -106,10 +108,10 @@ composite_image_2 = hdr.composite(hdr_path, g, a1, a2, method2)
 #                              Part 4 
 #-----------------------------------------------------------------#
 # HDR1 
-img1 = np.uint8(composite_image_1)
-convert1 = cv.cvtColor(img1, cv.COLOR_BGR2RGB)
-plt.imshow(convert1)
-plt.show()
+# img1 = np.uint8(composite_image_1)
+# convert1 = cv.cvtColor(img1, cv.COLOR_BGR2RGB)
+# plt.imshow(convert1)
+# plt.show()
 
 # HDR2
 img2 = np.uint8(composite_image_2)

@@ -8,20 +8,16 @@ import numpy as np
 # Return: Array of images
 # Description: Retrieves images from specified src
 def load_images(f_path, roi=False):
-	roi = True
 	img_array = []
 	imgs = os.listdir(f_path)
-	print(imgs)
-	#print("load_images() filepath: ", f_path)
+	print("load_images(): ", sorted(imgs))
 
-	for image in imgs:
+
+	for image in sorted(imgs):
 		if image.endswith(".JPG"):
 			#img = PImage.open(f_path + image)
-			img = cv.imread(f_path + image)
-			if roi == True:
-				img_array.append(region_of_interest(img))
-			else:
-				img_array.append(img)
+			img = cv.imread(f_path + image)				
+			img_array.append(region_of_interest(img, roi))
 
 	return img_array
 
@@ -29,16 +25,26 @@ def load_images(f_path, roi=False):
 # Parameters: image
 # Return: Crop image from region of interest
 # Description: For a given image, crop out a square of the image
-def region_of_interest(image):
+def region_of_interest(image, roi):
 	# Get image dimensions
 	height, width = image.shape[:2]
-	# h = int(height / 4)
-	# w = int(width * 3 / 4)
-	h = int(height / 2)
-	w = int(width / 2)
 
-	# Crop image
-	imgCrop = image[h:h+200, w:w+200]
+	if (roi):
+		#print("region_of_interest() - Gamma")
+		h = int(height / 4)
+		w = int(width * 3 / 4)
+
+		# Crop image
+		imgCrop = image[h:h+200, w:w+200]
+
+	else:
+		#print("region_of_interest() - HDR")
+		# Keep OG image
+		h = int(height)
+		w = int(width)
+		imgCrop = image[0:h, 0:w]
+
+	#print("region_of_interest() - image shape:", imgCrop.shape[:2])
 
 	# Sanity check that the region was choosen correctly
 	#im[h:h+100, w:w+100] = [255,255,255]
