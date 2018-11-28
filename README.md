@@ -50,7 +50,7 @@ For every color channel; blue, green, and red, we plot the graphs the composite 
 * HDR2 Histogram 
   * Algorithm 2: Takes the average non-saturated pixels per color channel across the three images
 
-**Part 4** 
+**Part 4**  
 Tone-mapped composite HDR final image
 * HDR1 image using algorithm 1
 * HDR2 image using algorithm 2
